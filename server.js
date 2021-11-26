@@ -1,13 +1,15 @@
+//Install express server
 const express = require('express');
 const path = require('path');
 
 const app = express();
 
-app.use(express.static('./dist/my-tasks-a'));
+// Serve only the static files form the dist directory
+app.use(express.static('./dist/angular-app-heroku'));
 
-app.get('/*', function (req, res) {
-  res.sendFile('index.html', {root: 'dist/my-tasks-a/'}
-  );
-});
+app.get('/*', (req, res) =>
+  res.sendFile('index.html', {root: 'dist/angular-app-heroku/'}),
+);
 
+// Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
